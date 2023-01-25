@@ -24,24 +24,31 @@ console.log(galleryItems);
       
 galleryContainer.addEventListener('click', onImageClick);
 
+const instance = basicLightbox.create(`<img scr = ''>`, {
+    onShow: instance => {
+        window.addEventListener('keydown', onEscape);
+    },
+    onClose: instance => {
+        window.removeEventListener('keydown', onEscape);
+    }
+})
+
 function onImageClick (event) {
     event.preventDefault();
     if (event.target.nodeName !== 'IMG') {
         return
     };
-
-    const largeImage = event.target.getAttribute('data-source');
-    const instance = basicLightbox.create(`<img src=${largeImage}>`);
+    instance.element().querySelector('img').src = event.target.dataset.source;
 
 instance.show();
+}
 
 
-galleryContainer.addEventListener('keydown', onEscape);
 function onEscape(event) {
     if (event.code === 'Escape') {
-    instance.close()
+    instance.close();
+    return;
     }   
 }
 
-}
 

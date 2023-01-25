@@ -20,18 +20,5 @@ return galleryItems.map(({preview, original, description}) => {
 </li>`}).join('');
 }
 
-galleryContainer.addEventListener('click', onImageClick);
-
-function onImageClick (event) {
-    event.preventDefault();
-    if (event.target.nodeName !== 'IMG') {
-        return
-    };
-
-    const largeImage = event.target.getAttribute('href');
     let lightbox = new SimpleLightbox('.gallery a', {captionsData: 'alt', captionDelay: 250});
    
-};
-      
-console.log(galleryItems);
-console.log(SimpleLightbox);
